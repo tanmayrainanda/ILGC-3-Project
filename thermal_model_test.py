@@ -7,9 +7,9 @@ from keras.layers import Dense, Conv2D, Flatten, MaxPooling2D
 
 # Load the dataset
 image_dir = 'Collected Dataset'
-label_dir = 'Labels'
+label_dir = 'Test_Labels'
 test_image_dir = 'Collected Dataset'
-test_label_dir = 'Labels'
+test_label_dir = 'Test_Labels'
 
 # Preprocess the images
 def preprocess_images(image_dir):
@@ -74,6 +74,6 @@ def classify_image(image_path):
         return temp_status, temp_adjust
 
 
-image_path = "/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/FLIR0044.jpg"
+image_path = "/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/FLIR0024.jpg"
 
 print(classify_image(image_path))
