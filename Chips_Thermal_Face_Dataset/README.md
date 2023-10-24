@@ -33,4 +33,3 @@ Participants included in this dataset agreed it being made publiclly accessible.
 
 ### Questions and Contributions
 For any enquires regarding the Chip Face Dataset, contact: contact@cookjames.uk
-
