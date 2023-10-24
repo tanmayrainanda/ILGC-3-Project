@@ -74,6 +74,6 @@ def classify_image(image_path):
         return temp_status, temp_adjust
 
 
-image_path = "/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/FLIR0024.jpg"
+image_path = "/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/FLIR0023.jpg"
 
 print(classify_image(image_path))
