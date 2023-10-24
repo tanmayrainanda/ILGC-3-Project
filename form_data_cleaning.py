@@ -1,4 +1,8 @@
-### This script is used to clean the data collected from the form. The data is collected in an excel file and this script is used to group the data in intervals of 10 minutes and take a mean of the temperature rating for each interval. The output is a dataframe with two columns, the first column is the time and the second column is the mean temperature rating for that interval. 
+### This script is used to clean the data collected from the form. The data is collected in an excel file 
+### and this script is used to group the data in intervals of 10 minutes 
+### and take a mean of the temperature rating for each interval. 
+### The output is a dataframe with two columns, the first column is the time 
+### and the second column is the mean temperature rating for that interval. 
 
 import pandas as pd
 
