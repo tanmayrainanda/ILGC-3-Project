@@ -1,9 +1,12 @@
 import os
 import cv2
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
-from sklearn.cluster import DBSCAN
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import IsolationForest
 
 # Load the dataset
 image_dir = 'Data_img'
@@ -23,53 +26,61 @@ def preprocess_images(image_dir):
 # Load and preprocess the dataset
 images, temperatures = preprocess_images(image_dir)
 
-# Standardize the temperature values
+# Remove outliers using Isolation Forest
 scaler = StandardScaler()
 temperatures_standardized = scaler.fit_transform(temperatures.reshape(-1, 1))
+outlier_detector = IsolationForest(contamination=0.05)
+is_inlier = outlier_detector.fit_predict(temperatures_standardized)
+images = images[is_inlier == 1]
+temperatures = temperatures[is_inlier == 1]
 
-# Define the model for clustering
-dbscan_model = DBSCAN(eps=0.5, min_samples=5)
+# Define the number of GMM components (clusters)
+num_components = 3  # Hot, Cold, and Moderate
 
-# Train the model
-dbscan_model.fit(temperatures_standardized)
-
-# Predict the clusters
-labels = dbscan_model.labels_
-
-# Define the cluster names
 cluster_names = {
-    -1: "Outlier",
     0: "Hot",
     1: "Moderate",
     2: "Cold"
 }
 
+# Create a GMM model
+gmm_model = GaussianMixture(n_components=num_components, random_state=0)
+
+# Fit the GMM model to the scaled temperature data
+gmm_model.fit(temperatures.reshape(-1, 1))
+image_clusters = gmm_model.predict(temperatures.reshape(-1, 1))
+
+# Visualize the clustered images using PCA for dimensionality reduction
+def plot_clusters(images, labels):
+    pca = PCA(n_components=2)
+    reduced_data = pca.fit_transform(images.reshape(images.shape[0], -1))
+    
+    plt.figure(figsize=(8, 6))
+    scatter = plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=labels)
+    plt.legend(handles=scatter.legend_elements()[0], labels=cluster_names.values())
+    plt.xlabel("Principal Component 1")
+    plt.ylabel("Principal Component 2")
+    plt.title("Cluster Visualization")
+    plt.show()
+
+plot_clusters(images, image_clusters)
+
 def classify_image(image_path):
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     if img is not None:
         temperature = np.mean(img)
-        temperature_standardized = scaler.transform([[temperature]])
-        cluster = dbscan_model.fit_predict(temperature_standardized)
+        cluster = gmm_model.predict([[temperature]])
         cluster_name = cluster_names[cluster[0]]
         return cluster_name
 
 image_path = "/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/FLIR0054.jpg"
 
-
-#print all identified clusters
+# Print the identified clusters
 for i in range(len(images)):
-    print("Image: ", i, "Cluster: ", cluster_names[labels[i]])
+    print("Image: ", i, "Temperature: ", temperatures[i], "Cluster: ", cluster_names[image_clusters[i]])
+
+print("Classified Temperature for the image:", classify_image(image_path))
 
 # Calculate the silhouette score
-silhouette_avg = silhouette_score(temperatures_standardized, labels)
+silhouette_avg = silhouette_score(temperatures.reshape(-1, 1), image_clusters)
 print("Silhouette Score: ", silhouette_avg)
-
-print(classify_image(image_path))
-
-#print the accuracy of the model
-print("Accuracy: ", np.sum(labels == 0) / len(labels))
-
-
-cv2.imshow('image', images[8])
-cv2.waitKey(0)
-cv2.destroyAllWindows()
