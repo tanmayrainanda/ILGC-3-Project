@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import IsolationForest
 
 # Load the dataset
-image_dir = 'Data_img'
+image_dir = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset'
 
 # Preprocess the images and extract temperature values
 def preprocess_images(image_dir):
@@ -29,7 +29,7 @@ images, temperatures = preprocess_images(image_dir)
 # Remove outliers using Isolation Forest
 scaler = StandardScaler()
 temperatures_standardized = scaler.fit_transform(temperatures.reshape(-1, 1))
-outlier_detector = IsolationForest(contamination=0.05)
+outlier_detector = IsolationForest(contamination=0.05, random_state=0)
 is_inlier = outlier_detector.fit_predict(temperatures_standardized)
 images = images[is_inlier == 1]
 temperatures = temperatures[is_inlier == 1]
@@ -44,7 +44,7 @@ cluster_names = {
 }
 
 # Create a GMM model
-gmm_model = GaussianMixture(n_components=num_components, random_state=0)
+gmm_model = GaussianMixture(n_components=num_components,covariance_type='diag', random_state=0)
 
 # Fit the GMM model to the scaled temperature data
 gmm_model.fit(temperatures.reshape(-1, 1))
