@@ -36,7 +36,7 @@ model.add(Dense(num_classes))
 model.add(Activation('softmax'))
 
 # Load the weights
-model.load_weights('first_try.h5')
+model.load_weights('classification_model_weights.h5')
 
 # Load the image file
 img_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/414.jpg'
