@@ -36,17 +36,19 @@ model.add(Dense(num_classes))
 model.add(Activation('softmax'))
 
 # Load the weights
-model.load_weights('classification_model_weights.h5')
+model.load_weights('Classification_model_weights.h5')
 
 # Load the image file
-img_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/414.jpg'
+num = np.random.randint(1, 414)
+print(num)
+img_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/' + str(num) + '.jpg'
 img = image.load_img(img_path, target_size=(img_width, img_height))
 
 # Convert the image to a numpy array
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
 
-class_labels = ['Very Hot', 'Hot', 'Neutral', 'Cold']
+class_labels = {'Cold': 0, 'Hot': 1, 'Neutral': 2, 'Very Hot': 3}
 
 # Predict the class of the image
 def classify_image(image_path):
@@ -57,7 +59,7 @@ def classify_image(image_path):
     proba = model.predict(images, batch_size=10)
     classes = np.argmax(proba, axis=-1)
     # Get the class label from the class index
-    class_label = class_labels[classes[0]]
+    class_label = list(class_labels.keys())[list(class_labels.values()).index(classes[0])]
     return class_label
 
 
