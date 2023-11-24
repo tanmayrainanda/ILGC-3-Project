@@ -94,7 +94,7 @@ model.fit_generator(
 # After defining your generators, you can access class indices like this:
 print(train_generator.class_indices)
 
-model.save_weights('first_try.h5')  # always save your weights after training or during training
+model.save_weights('Classification_model_weights.h5')  # always save your weights after training or during training
 
 # function to classify a single image
 #it should return the class of the image (hot, cold, neutral, very hot) as a string
