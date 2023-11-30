@@ -13,7 +13,8 @@ def scaleImage(img, width, height):
     return scaled_img
 
 def main():
-    img = cv2.imread("/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/FLIR0054.jpg")
+    img = cv2.imread('C:/Users/shiva/OneDrive/Documents/GitHub/ILGC-3-Project/Collected Dataset/24.jpg')
+    print(img)
     scaled_img = scaleImage(img, 32, 24)
     cv2.imshow("Original Image", img)
     cv2.imshow("Scaled Image", scaled_img)

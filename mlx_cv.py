@@ -15,7 +15,7 @@ cv2.namedWindow('Thermal Image', cv2.WINDOW_NORMAL)
 
 frame = np.zeros((24 * 32,))  # setup array for storing all 768 temperatures
 t_array = []
-
+count = 0
 while True:
     t1 = time.monotonic()
     try:
@@ -29,7 +29,8 @@ while True:
 
         # Apply a colormap (in this example, 'plasma')
         thermal_image_colored = cv2.applyColorMap(scaled_data, cv2.COLORMAP_PLASMA)
-
+        cv2.imwrite(f"thermal_image_{count}.jpg", thermal_image_colored)
+        count += 1
         cv2.imshow('Thermal Image', thermal_image_colored)
         cv2.waitKey(1)  # Required for imshow to work
 
