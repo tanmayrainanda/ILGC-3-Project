@@ -13,13 +13,15 @@ def scaleImage(img, width, height):
     return scaled_img
 
 def main():
-    img = cv2.imread('C:/Users/shiva/OneDrive/Documents/GitHub/ILGC-3-Project/Collected Dataset/24.jpg')
-    print(img)
-    scaled_img = scaleImage(img, 32, 24)
-    cv2.imshow("Original Image", img)
-    cv2.imshow("Scaled Image", scaled_img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    for i in range(0, 414):
+        try:
+            img = cv2.imread(f'C:\Users\shiva\OneDrive\Documents\GitHub\ILGC-3-Project\Collected Dataset\{i}.jpg')
+        except FileNotFoundError:
+            continue
+        print(img)
+        scaled_img = scaleImage(img, 32, 24)
+        cv2.imwrite(f'C:/Users/shiva/OneDrive/Documents/GitHub/ILGC-3-Project/Collected Dataset/scaled_down/{i}.jpg', scaled_img)
+        
 
 if __name__ == "__main__":
     main()
