@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 # dimensions of our images.
 img_width, img_height = 640, 480
 
-data_dir = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset'
+data_dir = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/scaled_down'
 label_file = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/image_data_labelled_2.csv'
 epochs = 35
 batch_size = 16
@@ -94,7 +94,7 @@ model.fit_generator(
 # After defining your generators, you can access class indices like this:
 print(train_generator.class_indices)
 
-model.save_weights('first_try.h5')  # always save your weights after training or during training
+model.save_weights('scale_down_weights.h5')  # always save your weights after training or during training
 
 # function to classify a single image
 #it should return the class of the image (hot, cold, neutral, very hot) as a string
