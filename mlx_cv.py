@@ -32,7 +32,12 @@ while True:
         cv2.imwrite(f"thermal_image_{count}.jpg", thermal_image_colored)
         count += 1
         cv2.imshow('Thermal Image', thermal_image_colored)
-        cv2.waitKey(1)  # Required for imshow to work
+
+        key = cv2.waitKey(1) & 0xFF  # Required for imshow to work
+
+        if key == ord('s') or key == ord('S'):
+            # Save the thermal image when 's' key is pressed
+            cv2.imwrite('thermal_image.png', thermal_image_colored)
 
         t_array.append(time.monotonic() - t1)
         print('Sample Rate: {0:2.1f}fps'.format(len(t_array) / np.sum(t_array)))
