@@ -36,10 +36,10 @@ model.add(Dense(num_classes))
 model.add(Activation('softmax'))
 
 # Load the weights
-model.load_weights('classification_model_weights.h5')
+model.load_weights('scale_down_weights.h5')
 
 # Load the image file
-img_path = 'Collected Dataset/414.jpg'
+img_path = 'thermal_image_39.jpg'
 img = image.load_img(img_path, target_size=(img_width, img_height))
 
 # Convert the image to a numpy array
