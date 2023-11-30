@@ -39,7 +39,7 @@ model.add(Activation('softmax'))
 model.load_weights('classification_model_weights.h5')
 
 # Load the image file
-img_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/414.jpg'
+img_path = 'Collected Dataset/414.jpg'
 img = image.load_img(img_path, target_size=(img_width, img_height))
 
 # Convert the image to a numpy array
