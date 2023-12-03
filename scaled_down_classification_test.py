@@ -37,11 +37,11 @@ model.add(Dense(num_classes))
 model.add(Activation('softmax'))
 
 # Load the weights
-model.load_weights('/Users/tanmay/Documents/Python Files/Leetcode/scale_down_weights_v3.h5')
+model.load_weights('scale_down_weights_v3.h5')
 
 # Load the image file
 #img_path = '/Users/tanmay/Downloads/Screenshot 2023-11-29 at 1.05.34 AM.png'
-img_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/thermal_image_41.jpg'
+img_path = 'thermal_image_41.jpg'
 img = image.load_img(img_path, target_size=(img_width, img_height))
 
 # Convert the image to a numpy array
