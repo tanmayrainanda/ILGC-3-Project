@@ -39,7 +39,7 @@ model.add(Activation('softmax'))
 # Load the model
 model.load_weights('scale_down_weights_v3.h5')
 
-img_path = 'Collected Dataset/scaled_down/270.jpg'
+img_path = 'thermal_image_3.jpg'
 img = image.load_img(img_path, target_size=(img_width, img_height))
 
 # Convert the image to a numpy array
