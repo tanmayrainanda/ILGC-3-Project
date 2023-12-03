@@ -35,13 +35,10 @@ num_classes = 4  # Change this to the number of classes
 model.add(Dense(num_classes))
 model.add(Activation('softmax'))
 
-# Load the weights
-model.load_weights('Classification_model_weights.h5')
+model.load_weights('scale_down_weights.h5')
 
 # Load the image file
-num = np.random.randint(1, 414)
-print(num)
-img_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/' + str(num) + '.jpg'
+img_path = 'thermal_image_39.jpg'
 img = image.load_img(img_path, target_size=(img_width, img_height))
 
 # Convert the image to a numpy array

@@ -13,12 +13,13 @@ def scaleImage(img, width, height):
     return scaled_img
 
 def main():
-    img = cv2.imread("/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/FLIR0054.jpg")
-    scaled_img = scaleImage(img, 32, 24)
-    cv2.imshow("Original Image", img)
-    cv2.imshow("Scaled Image", scaled_img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    for i in range(0, 414):
+        img = cv2.imread(f'/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/{i}.jpg')
+        if img is None:
+            continue
+        scaled_img = scaleImage(img, 32, 24)
+        cv2.imwrite(f'/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/scaled_down/{i}.jpg', scaled_img)
+        
 
 if __name__ == "__main__":
     main()
