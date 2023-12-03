@@ -110,7 +110,7 @@ def classify_image(image_path):
     return class_label
 
 def main():
-    image_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/333.jpg'
+    image_path = '/Users/tanmay/Documents/GitHub/ILGC-3-Project/Collected Dataset/33.jpg'
     print(classify_image(image_path))
     #test accuracy
     score = model.evaluate_generator(validation_generator, len(validation_df) // batch_size)
